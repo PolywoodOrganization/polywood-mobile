@@ -54,5 +54,8 @@
     "transformIgnorePatterns": [
       "/node_modules/(?!react-native)/.+"
     ]
+  },
+  "rnpm": {
+    "assets": ["assets/fonts/OpenSans-Cond"]
   }
 }

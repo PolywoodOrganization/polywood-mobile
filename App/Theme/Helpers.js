@@ -2,6 +2,9 @@ import { StyleSheet } from 'react-native'
 import { Colors } from 'App/Theme'
 
 export default StyleSheet.create({
+  backgroundMain: {
+    backgroundColor: Colors.primary,
+  },
   backgroundReset: {
     backgroundColor: Colors.transparent,
   },
