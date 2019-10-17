@@ -1,10 +1,10 @@
 import React from 'react'
 import { View } from 'react-native'
 import { connect } from 'react-redux'
-import { PropTypes } from 'prop-types'
 import { Helpers } from 'App/Theme'
 import Header from 'App/Components/HeaderComponent/HeaderComponent'
-import SearchBar from '../../Components/SearchBarComponent/SearchBarComponent'
+import SearchBar from 'App/Components/SearchBarComponent/SearchBarComponent'
+import Movie from 'App/Components/MovieComponent/MovieComponent'
 
 class HomeScreen extends React.Component {
   render() {
@@ -12,6 +12,7 @@ class HomeScreen extends React.Component {
       <View style={[Helpers.fill, Helpers.backgroundMain]}>
         <Header />
         <SearchBar />
+        <Movie />
       </View>
     )
   }
