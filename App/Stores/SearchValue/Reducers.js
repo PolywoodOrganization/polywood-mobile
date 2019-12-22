@@ -3,7 +3,6 @@ import { createReducer } from 'reduxsauce'
 import { SearchValueTypes } from './Actions'
 
 export const setSearchValue = (state, { searchValue }) => {
-  console.log('coucou')
   return {
     ...state,
     searchValue: searchValue,

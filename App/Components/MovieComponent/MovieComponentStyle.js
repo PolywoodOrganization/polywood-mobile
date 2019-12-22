@@ -10,6 +10,8 @@ export default StyleSheet.create({
     backgroundColor: Colors.secondary,
     flexDirection: 'column',
     height: 250,
+    marginHorizontal: 10,
+    marginVertical: 10,
     width: 150,
   },
   titleText: {

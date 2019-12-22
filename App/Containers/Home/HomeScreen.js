@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import { Helpers } from 'App/Theme'
 import Header from 'App/Components/HeaderComponent/HeaderComponent'
 import SearchBar from 'App/Components/SearchBarComponent/SearchBarComponent'
-import Movie from 'App/Components/MovieComponent/MovieComponent'
+import ResultList from 'App/Components/ResultListComponent/ResultListComponent'
 
 class HomeScreen extends React.Component {
   render() {
@@ -12,7 +12,7 @@ class HomeScreen extends React.Component {
       <View style={[Helpers.fill, Helpers.backgroundMain]}>
         <Header />
         <SearchBar />
-        <Movie />
+        <ResultList />
       </View>
     )
   }

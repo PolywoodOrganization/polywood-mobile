@@ -21,7 +21,7 @@ class SearchBar extends Component {
           value={this.state.value}
           onChangeText={(text) => {
             this.setState({ value: text })
-            this.props.setSearchValue(this.state.value)
+            this.props.setSearchValue(text)
           }}
         />
         <Text>{this.props.result}</Text>
