@@ -1,6 +1,6 @@
 import React from 'react'
 import { TextInput } from 'react-native'
-import { Helpers } from 'App/Theme'
+import { Helpers, Metrics } from 'App/Theme'
 import styles from'./InputComponentStyle'
 
 const InputComponent = (props) => (
