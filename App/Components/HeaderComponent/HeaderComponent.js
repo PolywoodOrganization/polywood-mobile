@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { View, Image } from 'react-native'
 import styles from './HeaderComponentStyle'
-import { Helpers } from 'App/Theme'
+import { Helpers, Images } from 'App/Theme'
 
 class Header extends Component {
   render() {
@@ -9,7 +9,7 @@ class Header extends Component {
       <View style={[styles.header, Helpers.center, Helpers.fullWidth]}>
         <Image
           style={[styles.image, Helpers.fullSize]}
-          source={require('../../Assets/Images/polywood.png')}
+          source={Images.logo}
         />
       </View>
     )

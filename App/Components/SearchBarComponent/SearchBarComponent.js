@@ -5,6 +5,7 @@ import { Helpers } from 'App/Theme'
 import { connect } from 'react-redux'
 import { PropTypes } from 'prop-types'
 import SearchValueActions from 'App/Stores/SearchValue/Actions'
+import InputComponent from '../InputComponent/InputComponent'
 
 class SearchBar extends Component {
   constructor(props) {
@@ -15,8 +16,7 @@ class SearchBar extends Component {
   render() {
     return (
       <View style={[Helpers.center, Helpers.fullWidth]}>
-        <TextInput
-          style={[styles.searchInput, Helpers.fullWidth]}
+        <InputComponent
           placeholder="Rechercher..."
           value={this.state.value}
           onChangeText={(text) => {
