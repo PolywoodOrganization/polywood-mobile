@@ -13,14 +13,13 @@ class ResultList extends Component {
         contentContainerStyle={[styles.listContainer, Helpers.fullWidth, Helpers.center]}
       >
         <FlatList
-          keyExtractor={(i) => i.id}
+          keyExtractor={(i) => `${i.id}`}
           data={this.props.results}
           renderItem={(i) => (
             <View style={Helpers.center}>
               <Movie titre={i.title} image={i.image} />
             </View>
-          )}
-        />
+          )}/>
       </ScrollView>
     )
   }

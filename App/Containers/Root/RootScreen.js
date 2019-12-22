@@ -6,6 +6,8 @@ import { connect } from 'react-redux'
 import StartupActions from 'App/Stores/Startup/Actions'
 import { PropTypes } from 'prop-types'
 import { Helpers } from 'App/Theme'
+import DropdownAlert from 'react-native-dropdownalert'
+import { DropDownHolder } from 'App/Services/DropDownHolder'
 
 class RootScreen extends React.Component {
   componentDidMount() {
@@ -16,6 +18,7 @@ class RootScreen extends React.Component {
   render() {
     return (
       <View style={Helpers.fill}>
+        <DropdownAlert ref={(ref) => DropDownHolder.setDropDown(ref)}/>
         <AppNavigator
           // Initialize the NavigationService (see https://reactnavigation.org/docs/en/navigating-without-navigation-prop.html)
           ref={(navigatorRef) => {

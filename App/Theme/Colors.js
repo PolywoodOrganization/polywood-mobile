@@ -9,9 +9,7 @@ export default {
   transparent: 'rgba(0,0,0,0)',
   // Home colors:
   text: '#dde098',
-  white: 'white',
+  white: '#FFFFFF',
   primary: '#134367',
   secondary: '#ff5454',
-  success: '#28a745',
-  error: '#dc3545',
 }
