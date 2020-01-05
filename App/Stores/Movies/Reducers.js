@@ -24,9 +24,11 @@ export const moviesSuccess = (state, { data }) => {
   })
 }
 
+export const resetMovies = (state) => INITIAL_STATE
 
 export const reducer = createReducer(INITIAL_STATE, {
   [MoviesType.MOVIES_LOADING]: moviesLoading,
   [MoviesType.MOVIES_SUCCESS]: moviesSuccess,
   [MoviesType.MOVIES_FAILURE]: moviesFailure,
+  [MoviesType.RESET_MOVIES]: resetMovies,
 })

@@ -1,10 +1,11 @@
 import { createActions} from 'reduxsauce'
 
 const {Types, Creators} = createActions({
-  movies: ['token', 'page'],
+  movies: ['token', 'page', 'filterType', 'filter'],
   moviesLoading: null,
   moviesSuccess: ['data'],
   moviesFailure:['error'],
+  resetMovies: null,
 
 })
 

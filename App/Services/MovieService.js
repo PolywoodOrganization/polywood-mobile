@@ -37,7 +37,27 @@ function getImage(token, id) {
     .catch((error) => console.log(error))
 }
 
+function filterTitle(token, filter) {
+  return movieApiClient
+    .get(`movies/title/${filter}`, { headers: { 'Authorization': `Bearer ${token}` } })
+    .then((response) => {
+      return response.data
+    })
+    .catch((error) => console.log(error))
+}
+
+function filterGenre(token, genre) {
+  return movieApiClient
+    .get(`movies/genre/${genre}`, { headers: { 'Authorization': `Bearer ${token}` } })
+    .then((response) => {
+      return response.data
+    })
+    .catch((error) => console.log(error))
+}
+
 export const MovieService = {
   getMovies,
-  getImage
+  getImage,
+  filterTitle,
+  filterGenre
 }
