@@ -21,26 +21,28 @@ class SearchBar extends Component {
           value={this.state.value}
           onChangeText={(text) => {
             this.setState({ value: text })
-            this.props.setSearchValue(text)
+            this.props.setTitleFilter(text)
           }}
         />
         <AppText>{this.props.result}</AppText>
+        <AppText>{this.props.filterGenre}</AppText>
       </View>
     )
   }
 }
 
 SearchBar.propTypes = {
-  setSearchValue: PropTypes.func,
+  setTitleFilter: PropTypes.func,
   result: PropTypes.string,
 }
 
 const mapStateToProps = (state) => ({
-  result: state.searchValue.searchValue,
+  result: state.searchValue.filterTitle,
+  filterGenre: state.searchValue.filterGenre
 })
 
 const mapDispatchToProps = (dispatch) => ({
-  setSearchValue: (searchText) => dispatch(SearchValueActions.setSearchValue(searchText)),
+  setTitleFilter: (searchText) => dispatch(SearchValueActions.setTitleFilter(searchText)),
 })
 
 export default connect(

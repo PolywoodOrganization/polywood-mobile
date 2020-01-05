@@ -7,6 +7,7 @@ import { MovieService } from '../../Services/MovieService'
 import { connect } from 'react-redux'
 import TagComponent from 'App/Components/TagComponent/TagComponent'
 import MoviesActions from '../../Stores/Movies/Actions'
+import SearchValueActions from '../../Stores/SearchValue/Actions'
 
 class Movie extends Component {
 
@@ -44,13 +45,18 @@ class Movie extends Component {
     }
   }
 
+  onCategoryPress(genre) {
+    this.props.getMovies(this.props.token, null, 'genre', genre)
+    this.props.setGenreFilter(genre)
+  }
+
   renderGenre() {
-    const genres = this.props.movie.genre.split(' | ')
+    const genres = this.props.movie.genre.split('|')
     return (
       genres.map((genre) =>
         (
-          <TouchableOpacity onPress={() => this.props.getMovies(this.props.token, null, 'genre', genre)}>
-            <TagComponent text={genre}/>
+          <TouchableOpacity onPress={() => this.onCategoryPress(genre.trim())}>
+            <TagComponent text={genre.trim()}/>
           </TouchableOpacity>
         ),
       ))
@@ -88,6 +94,8 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   getMovies: (token, page, filterType, filter) => dispatch(MoviesActions.movies(token, page, filterType, filter)),
+  setGenreFilter: (genre) => dispatch(SearchValueActions.setGenreFilter(genre)),
+
 })
 
 export default connect(

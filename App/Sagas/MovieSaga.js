@@ -21,7 +21,6 @@ export function* getMovies({token, page = null, filterType = null, filter = null
   }
 
   if(response) {
-    console.log(response)
     yield put(MoviesActions.moviesSuccess(response))
   } else {
     yield put(MoviesActions.moviesFailure('Error fetching movies'))

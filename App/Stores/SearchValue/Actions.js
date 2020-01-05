@@ -1,8 +1,8 @@
 import { createActions } from 'reduxsauce'
 
 const { Types, Creators } = createActions({
-  // Set SearchValue
-  setSearchValue: ['searchValue'],
+  setTitleFilter: ['title'],
+  setGenreFilter: ['genre'],
 })
 
 export const SearchValueTypes = Types
