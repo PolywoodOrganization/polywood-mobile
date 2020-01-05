@@ -1,7 +1,8 @@
 import React from 'react'
-import { ActivityIndicator, Text, TouchableOpacity } from 'react-native'
+import { ActivityIndicator, TouchableOpacity } from 'react-native'
 import { ApplicationStyles, Colors } from 'App/Theme'
 import styles from './ButtonComponentStyle'
+import AppText from 'App/Components/MyAppText/MyAppText'
 
 const ButtonComponent = (props) => (
   <TouchableOpacity
@@ -12,9 +13,9 @@ const ButtonComponent = (props) => (
       props.isLoading ?
         (<ActivityIndicator color={Colors.primary}/>)
         :
-        (<Text style={styles.touchableText}>
+        (<AppText style={styles.touchableText}>
           {props.title}
-        </Text>)
+        </AppText>)
     }
   </TouchableOpacity>
 )

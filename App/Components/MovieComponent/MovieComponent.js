@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
-import { View, Text, Image } from 'react-native'
+import { Image, View } from 'react-native'
 import styles from './MovieComponentStyle'
 import { Helpers } from 'App/Theme'
 import { PropTypes } from 'prop-types'
+import AppText from 'App/Components/MyAppText/MyAppText'
 
 class Movie extends Component {
   render() {
@@ -14,9 +15,9 @@ class Movie extends Component {
             source={require('App/Assets/Images/clapper.png')}
           />
         ) : (
-          <Image style={[styles.image, Helpers.fill]} source={{ uri: this.props.image }} />
+          <Image style={[styles.image, Helpers.fill]} source={{ uri: this.props.image }}/>
         )}
-        <Text style={styles.titleText}>{this.props.title.toUpperCase()}</Text>
+        <AppText style={styles.titleText}>{this.props.title.toUpperCase()}</AppText>
       </View>
     )
   }

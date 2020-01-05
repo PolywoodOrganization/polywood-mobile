@@ -1,11 +1,11 @@
 import React, { Component } from 'react'
-import { View, TextInput, Text } from 'react-native'
-import styles from './SearchBarComponentStyle'
+import { View } from 'react-native'
 import { Helpers } from 'App/Theme'
 import { connect } from 'react-redux'
 import { PropTypes } from 'prop-types'
 import SearchValueActions from 'App/Stores/SearchValue/Actions'
 import InputComponent from '../InputComponent/InputComponent'
+import AppText from 'App/Components/MyAppText/MyAppText'
 
 class SearchBar extends Component {
   constructor(props) {
@@ -24,7 +24,7 @@ class SearchBar extends Component {
             this.props.setSearchValue(text)
           }}
         />
-        <Text>{this.props.result}</Text>
+        <AppText>{this.props.result}</AppText>
       </View>
     )
   }
@@ -45,5 +45,5 @@ const mapDispatchToProps = (dispatch) => ({
 
 export default connect(
   mapStateToProps,
-  mapDispatchToProps
+  mapDispatchToProps,
 )(SearchBar)
