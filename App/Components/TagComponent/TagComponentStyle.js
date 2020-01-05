@@ -8,6 +8,8 @@ export default StyleSheet.create({
     paddingHorizontal: 10  ,
     backgroundColor: Colors.primary,
     borderRadius: 30,
+    borderColor: Colors.secondary,
+    borderWidth: 1,
   },
   text: {
     color: Colors.secondary,

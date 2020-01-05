@@ -16,6 +16,7 @@ export function* getMovies({token, page = null, filterType = null, filter = null
       response = yield call(MovieService.filterTitle, token, filter)
       break
     default :
+      if(page === 0) yield put(MoviesActions.resetMovies())
       response = yield call(MovieService.getMovies, token, page)
       break
   }

@@ -6,6 +6,7 @@ import { PropTypes } from 'prop-types'
 import SearchValueActions from 'App/Stores/SearchValue/Actions'
 import InputComponent from '../InputComponent/InputComponent'
 import AppText from 'App/Components/MyAppText/MyAppText'
+import TagComponent from 'App/Components/TagComponent/TagComponent'
 
 class SearchBar extends Component {
   constructor(props) {
@@ -25,7 +26,6 @@ class SearchBar extends Component {
           }}
         />
         <AppText>{this.props.result}</AppText>
-        <AppText>{this.props.filterGenre}</AppText>
       </View>
     )
   }
