@@ -11,7 +11,7 @@ class Movie extends Component {
         {this.props.image === '' ? (
           <Image
             style={[styles.image, Helpers.fill]}
-            source={require('../../Assets/Images/clapper.png')}
+            source={require('App/Assets/Images/clapper.png')}
           />
         ) : (
           <Image style={[styles.image, Helpers.fill]} source={{ uri: this.props.image }} />
@@ -23,7 +23,7 @@ class Movie extends Component {
 }
 
 Movie.defaultProps = {
-  title: 'Titre du film',
+  title: '',
   image: '',
 }
 
