@@ -10,7 +10,7 @@ export const moviesLoading = (state) => ({
 
 export const moviesFailure = (state, { error }) => ({
   ...state,
-  movies: null,
+  movies: [],
   moviesLoading: false,
   moviesError: error,
 })

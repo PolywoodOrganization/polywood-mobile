@@ -19,12 +19,12 @@ class ResultList extends Component {
           renderItem={(i) => {
             return (
               <View style={Helpers.center}>
-                <Movie title={i.item.title}/>
+                <Movie title={i.item.title} id={i.item.movieid}/>
               </View>
             )
           }}
           onEndReached={() => this.props.getNextPage()}
-          onEndReachedThreshold={0}
+          onEndReachedThreshold={0.5}
           refreshing={this.props.refreshing}
         />
       </View>
