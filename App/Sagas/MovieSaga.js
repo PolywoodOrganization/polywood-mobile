@@ -5,7 +5,6 @@ import { DropDownHolder } from 'App/Services/DropDownHolder'
 
 export function* getMovies({token, page}) {
   yield put(MoviesActions.moviesLoading())
-
   const response = yield call(MovieService.getMovies, token, page)
   if(response) {
     yield put(MoviesActions.moviesSuccess(response))

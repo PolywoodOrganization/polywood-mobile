@@ -10,6 +10,7 @@ export function* login({login, password}) {
   const response = yield call(AuthService.login, login, password)
   if(response) {
     yield put(AuthActions.loginSuccess(response))
+    NavigationService.navigateAndReset('HomeScreen')
   } else {
     yield put(AuthActions.loginFailure('email or password incorrect'))
     DropDownHolder.dropDown.alertWithType('error', 'Error', 'Login or password incorrect')

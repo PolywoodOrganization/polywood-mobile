@@ -19,7 +19,7 @@ class ResultList extends Component {
           renderItem={(i) => {
             return (
               <View style={Helpers.center}>
-                <Movie title={i.item.title} id={i.item.movieid}/>
+                <Movie movie={i.item}/>
               </View>
             )
           }}

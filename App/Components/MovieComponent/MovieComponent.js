@@ -1,43 +1,58 @@
 import React, { Component } from 'react'
-import { Image, View } from 'react-native'
+import { ActivityIndicator, Image, View } from 'react-native'
 import styles from './MovieComponentStyle'
-import { Helpers } from 'App/Theme'
-import { PropTypes } from 'prop-types'
+import { Colors, Helpers, Metrics } from 'App/Theme'
 import AppText from 'App/Components/MyAppText/MyAppText'
 import { MovieService } from '../../Services/MovieService'
-import MoviesActions from '../../Stores/Movies/Actions'
 import { connect } from 'react-redux'
 
 class Movie extends Component {
 
   constructor(props) {
     super(props)
-    this.state= {
+    this.state = {
       image: '',
       loading: false,
     }
   }
 
   componentDidMount() {
-    this.setState({loading: true})
-    MovieService.getImage(this.props.token, this.props.id).then((data) => {
-      this.setState({image: data, loading: false})
-      }
-    ).catch((error) => {console.log({...error})})
+    this.setState({ loading: true })
+    MovieService.getImage(this.props.token, this.props.movie.movieid).then((data) => {
+        this.setState({ image: data, loading: false })
+      },
+    ).catch((error) => {
+      console.log({ ...error })
+    })
+  }
+
+  renderImage() {
+    if (this.state.loading) {
+      return (<ActivityIndicator size={'large'} color={Colors.primary}/>)
+
+    } else if (this.state.image === '') {
+      return (<Image
+        style={[styles.image, Helpers.fill]}
+        source={require('App/Assets/Images/clapper.png')}
+      />)
+    } else {
+      return (<Image
+        style={[styles.image, Helpers.fill]}
+        source={{ uri: this.state.image }}/>)
+    }
   }
 
   render() {
     return (
-      <View style={[styles.movieContainer, Helpers.center]}>
-        {this.state.image === '' || this.state.loading ? (
-          <Image
-            style={[styles.image, Helpers.fill]}
-            source={require('App/Assets/Images/clapper.png')}
-          />
-        ) : (
-          <Image style={[styles.image, Helpers.fill]} source={{ uri: this.state.image }}/>
-        )}
-        <AppText style={styles.titleText}>{this.props.title.toUpperCase()}</AppText>
+      <View style={[styles.movieContainer, Helpers.center, Metrics.smallHorizontalPadding ]}>
+        {this.renderImage()}
+        <View style={Helpers.fillCol}>
+          <AppText style={[styles.titleText, Helpers.textRight]}>{this.props.movie.title.toUpperCase()}</AppText>
+          <AppText style={[styles.descText, styles.yearText, Helpers.textRight]}>{this.props.movie.releaseyear}</AppText>
+          <AppText style={[styles.descText, Helpers.textRight]}>{this.props.movie.genre}</AppText>
+          <AppText style={[styles.crossText, Helpers.textRight]}
+          onPress={() => console.log('coucou')}>+</AppText>
+        </View>
       </View>
     )
   }
@@ -48,10 +63,6 @@ Movie.defaultProps = {
   image: '',
 }
 
-Movie.propTypes = {
-  title: PropTypes.string,
-  image: PropTypes.string,
-}
 const mapStateToProps = (state) => ({
   token: state.auth.token,
 })

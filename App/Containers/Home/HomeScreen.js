@@ -11,7 +11,7 @@ class HomeScreen extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      page: 1,
+      page: 0,
     }
   }
 
