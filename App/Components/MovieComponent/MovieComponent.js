@@ -8,6 +8,7 @@ import { connect } from 'react-redux'
 import TagComponent from 'App/Components/TagComponent/TagComponent'
 import MoviesActions from '../../Stores/Movies/Actions'
 import SearchValueActions from '../../Stores/SearchValue/Actions'
+import NavigationService from '../../Services/NavigationService'
 
 class Movie extends Component {
 
@@ -50,6 +51,11 @@ class Movie extends Component {
     this.props.setGenreFilter(genre)
   }
 
+  onDetails() {
+    this.props.setCurrentMovie({...this.props.movie, image : this.state.image})
+    NavigationService.navigate('MovieScreen')
+  }
+
   renderGenre() {
     const genres = this.props.movie.genre.split('|')
     return (
@@ -74,18 +80,13 @@ class Movie extends Component {
             {this.renderGenre()}
           </View>
           <TouchableOpacity
-            onPress={() => console.log('coucou')}>
+            onPress={() => this.onDetails()}>
             <AppText style={[styles.crossText, Helpers.textRight]}>+</AppText>
           </TouchableOpacity>
         </View>
       </View>
     )
   }
-}
-
-Movie.defaultProps = {
-  title: '',
-  image: '',
 }
 
 const mapStateToProps = (state) => ({
@@ -95,7 +96,7 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
   getMovies: (token, page, filterType, filter) => dispatch(MoviesActions.movies(token, page, filterType, filter)),
   setGenreFilter: (genre) => dispatch(SearchValueActions.setGenreFilter(genre)),
-
+  setCurrentMovie: (movie) => dispatch(MoviesActions.setCurrentMovie(movie))
 })
 
 export default connect(
