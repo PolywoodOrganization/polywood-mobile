@@ -10,14 +10,14 @@ const movieApiClient = axios.create({
   timeout: 3000,
 })
 
-movieApiClient.interceptors.request.use((req) => {
-  console.log(req)
-  return req
-}, error => Promise.reject(error))
-movieApiClient.interceptors.response.use((res) => {
-  console.log(res)
-  return res
-}, error => Promise.reject(error))
+// movieApiClient.interceptors.request.use((req) => {
+//   console.log(req)
+//   return req
+// }, error => Promise.reject(error))
+// movieApiClient.interceptors.response.use((res) => {
+//   console.log(res)
+//   return res
+// }, error => Promise.reject(error))
 
 function getMovies(token, page) {
   return movieApiClient

@@ -6,6 +6,7 @@ const {Types, Creators} = createActions({
   moviesSuccess: ['data'],
   moviesFailure:['error'],
   resetMovies: null,
+  setCurrentMovie: ['movie'],
 
 })
 
