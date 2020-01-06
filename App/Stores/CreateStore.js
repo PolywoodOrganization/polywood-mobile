@@ -21,7 +21,8 @@ const persistConfig = {
    */
   blacklist: [
     'movies',
-    'searchValue'
+    'searchValue',
+    'actors'
   ],
 }
 

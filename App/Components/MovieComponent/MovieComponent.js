@@ -61,7 +61,7 @@ class Movie extends Component {
     return (
       genres.map((genre) =>
         (
-          <TouchableOpacity onPress={() => this.onCategoryPress(genre.trim())}>
+          <TouchableOpacity key={`genre-${genre}`} onPress={() => this.onCategoryPress(genre.trim())}>
             <TagComponent text={genre.trim()}/>
           </TouchableOpacity>
         ),

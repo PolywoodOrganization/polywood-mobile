@@ -35,7 +35,7 @@ export default StyleSheet.create({
     color: Colors.text,
     fontSize: 18,
   },
-  actorInfo: {
+  movieInfo: {
     color: Colors.text,
     textDecorationLine: 'underline',
     fontSize: 18,

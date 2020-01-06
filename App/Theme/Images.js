@@ -8,4 +8,6 @@ export default {
   search: require('App/Assets/Images/search.png'),
   writer: require('App/Assets/Images/writer.png'),
   actor: require('App/Assets/Images/actor.png'),
+  starEmpty: require('App/Assets/Images/star-empty.png'),
+  star: require('App/Assets/Images/star.png'),
 }

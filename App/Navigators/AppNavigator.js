@@ -4,6 +4,7 @@ import HomeScreen from 'App/Containers/Home/HomeScreen'
 import SplashScreen from 'App/Containers/SplashScreen/SplashScreen'
 import LoginScreen from 'App/Containers/LoginScreen/LoginScreen'
 import MovieScreen from 'App/Containers/MovieScreen/MovieScreen'
+import ActorScreen from 'App/Containers/ActorScreen/ActorScreen'
 
 /**
  * The root screen contains the application's navigation.
@@ -20,6 +21,7 @@ const StackNavigator = createStackNavigator(
     MainScreen: LoginScreen,
     HomeScreen: HomeScreen,
     MovieScreen: MovieScreen,
+    ActorScreen: ActorScreen,
   },
   {
     // By default the application will show the splash screen
