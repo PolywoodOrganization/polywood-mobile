@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { ActivityIndicator, Image, TouchableOpacity, View } from 'react-native'
 import styles from './MovieComponentStyle'
-import { Colors, Helpers, Metrics } from 'App/Theme'
+import { Colors, Helpers, Metrics, Images } from 'App/Theme'
 import AppText from 'App/Components/MyAppText/MyAppText'
 import { MovieService } from '../../Services/MovieService'
 import { connect } from 'react-redux'
@@ -36,7 +36,7 @@ class Movie extends Component {
     } else if (this.state.image === '') {
       return (<Image
         style={[styles.image, Helpers.fill]}
-        source={require('App/Assets/Images/clapper.png')}
+        source={Images.clapper}
       />)
     } else {
       return (<Image

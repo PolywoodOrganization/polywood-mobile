@@ -4,4 +4,6 @@
 
 export default {
   logo: require('App/Assets/Images/polywood.png'),
+  clapper: require('App/Assets/Images/clapper.png'),
+  search: require('App/Assets/Images/search.png')
 }
