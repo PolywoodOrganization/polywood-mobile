@@ -17,7 +17,7 @@ export const loginFailure = (state, { error }) => ({
 
 export const  loginSuccess = (state, { data }) => ({
   ...state,
-  token: data.token,
+  token: data,
   loginLoading: false,
   LoginError: null
 })

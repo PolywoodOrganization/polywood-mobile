@@ -1,6 +1,5 @@
 import axios from 'axios'
 import {Config} from 'App/Config'
-import NavigationService from './NavigationService'
 
 const userApiClient = axios.create({
   baseURL: Config.API_URL,
@@ -24,7 +23,6 @@ function login(login, password) {
   return userApiClient
     .post('/login',  { login: login, password: password})
     .then((response) => {
-      NavigationService.navigate('HomeScreen')
       return response.data
     })
     .catch((error) => console.log(error))

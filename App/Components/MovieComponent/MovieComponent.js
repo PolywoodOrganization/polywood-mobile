@@ -1,35 +1,104 @@
 import React, { Component } from 'react'
-import { View, Text, Image } from 'react-native'
+import { ActivityIndicator, Image, TouchableOpacity, View } from 'react-native'
 import styles from './MovieComponentStyle'
-import { Helpers } from 'App/Theme'
-import { PropTypes } from 'prop-types'
+import { Colors, Helpers, Metrics, Images } from 'App/Theme'
+import AppText from 'App/Components/MyAppText/MyAppText'
+import { MovieService } from '../../Services/MovieService'
+import { connect } from 'react-redux'
+import TagComponent from 'App/Components/TagComponent/TagComponent'
+import MoviesActions from '../../Stores/Movies/Actions'
+import SearchValueActions from '../../Stores/SearchValue/Actions'
 
 class Movie extends Component {
+
+  constructor(props) {
+    super(props)
+    this.state = {
+      image: '',
+      loading: false,
+    }
+  }
+
+  componentDidMount() {
+    this.setState({ loading: true })
+    MovieService.getImage(this.props.token, this.props.movie.movieid).then((data) => {
+        this.setState({ image: data, loading: false })
+      },
+    ).catch((error) => {
+      console.log({ ...error })
+    })
+  }
+
+  renderImage() {
+    if (this.state.loading) {
+      return (<ActivityIndicator size={'large'} color={Colors.primary}/>)
+
+    } else if (this.state.image === '') {
+      return (<Image
+        style={[styles.image, Helpers.fill]}
+        source={Images.clapper}
+      />)
+    } else {
+      return (<Image
+        style={[styles.image, Helpers.fill]}
+        source={{ uri: this.state.image }}/>)
+    }
+  }
+
+  onCategoryPress(genre) {
+    this.props.getMovies(this.props.token, null, 'genre', genre)
+    this.props.setGenreFilter(genre)
+  }
+
+  renderGenre() {
+    const genres = this.props.movie.genre.split('|')
+    return (
+      genres.map((genre) =>
+        (
+          <TouchableOpacity onPress={() => this.onCategoryPress(genre.trim())}>
+            <TagComponent text={genre.trim()}/>
+          </TouchableOpacity>
+        ),
+      ))
+  }
+
   render() {
     return (
-      <View style={[styles.movieContainer, Helpers.center]}>
-        {this.props.image === '' ? (
-          <Image
-            style={[styles.image, Helpers.fill]}
-            source={require('../../Assets/Images/clapper.png')}
-          />
-        ) : (
-          <Image style={[styles.image, Helpers.fill]} source={{ uri: this.props.image }} />
-        )}
-        <Text style={styles.titleText}>{this.props.title.toUpperCase()}</Text>
+      <View style={[styles.movieContainer, Helpers.center, Metrics.smallHorizontalPadding]}>
+        {this.renderImage()}
+        <View style={Helpers.fillCol}>
+          <AppText style={[styles.titleText, Helpers.textRight]}>{this.props.movie.title.toUpperCase()}</AppText>
+          <AppText
+            style={[styles.descText, styles.yearText, Helpers.textRight]}>{this.props.movie.releaseyear}</AppText>
+          <View style={[Helpers.row, { flexWrap: 'wrap', justifyContent: 'flex-end' }]}>
+            {this.renderGenre()}
+          </View>
+          <TouchableOpacity
+            onPress={() => console.log('coucou')}>
+            <AppText style={[styles.crossText, Helpers.textRight]}>+</AppText>
+          </TouchableOpacity>
+        </View>
       </View>
     )
   }
 }
 
 Movie.defaultProps = {
-  title: 'Titre du film',
+  title: '',
   image: '',
 }
 
-Movie.propTypes = {
-  title: PropTypes.string,
-  image: PropTypes.string,
-}
+const mapStateToProps = (state) => ({
+  token: state.auth.token,
+})
 
-export default Movie
+const mapDispatchToProps = (dispatch) => ({
+  getMovies: (token, page, filterType, filter) => dispatch(MoviesActions.movies(token, page, filterType, filter)),
+  setGenreFilter: (genre) => dispatch(SearchValueActions.setGenreFilter(genre)),
+
+})
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(Movie)
