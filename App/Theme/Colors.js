@@ -12,4 +12,5 @@ export default {
   white: '#FFFFFF',
   primary: '#134367',
   secondary: '#ff5454',
+  orange: '#ff8054',
 }

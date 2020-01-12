@@ -1,7 +1,7 @@
 import React from 'react'
-import { View } from 'react-native'
+import { StatusBar, View } from 'react-native'
 import { connect } from 'react-redux'
-import { Helpers } from 'App/Theme'
+import { Colors, Helpers, Metrics } from 'App/Theme'
 import AppText from 'App/Components/MyAppText/MyAppText'
 import styles from './ProfileScreenStyle'
 
@@ -10,7 +10,11 @@ class ProfileScreen extends React.Component {
   render() {
     return (
       <View style={[Helpers.fill, Helpers.backgroundMain]}>
-        <AppText style={styles.title}>{this.props.me.firstname} {this.props.me.lastname}</AppText>
+        <StatusBar backgroundColor={Colors.primary} barStyle="light-content"/>
+        <View style={Metrics.mediumVerticalMargin}>
+          <AppText style={styles.title}>{this.props.me.firstname} {this.props.me.lastname}</AppText>
+          <AppText style={[styles.smallTitle, Helpers.textCenter]}>{this.props.me.login}</AppText>
+        </View>
       </View>
     )
   }

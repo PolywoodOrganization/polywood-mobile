@@ -1,5 +1,5 @@
 import React from 'react'
-import { TouchableOpacity, View, ActivityIndicator } from 'react-native'
+import { TouchableOpacity, View, ActivityIndicator, StatusBar } from 'react-native'
 import { connect } from 'react-redux'
 import { Colors, Helpers, Metrics } from 'App/Theme'
 import Header from 'App/Components/HeaderComponent/HeaderComponent'
@@ -43,6 +43,7 @@ class HomeScreen extends React.Component {
   render() {
     return (
       <View style={[Helpers.fill, Helpers.backgroundMain]}>
+        <StatusBar backgroundColor={Colors.orange} barStyle="light-content"/>
         <Header logout={() => this.logoutAndRedirect()}/>
         <SearchBar/>
         <View style={Helpers.center}>
