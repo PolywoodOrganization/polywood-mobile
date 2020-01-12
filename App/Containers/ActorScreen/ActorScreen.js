@@ -8,6 +8,7 @@ import { ActorService } from 'App/Services/ActorService'
 import { MovieService } from 'App/Services/MovieService'
 import MoviesActions from 'App/Stores/Movies/Actions'
 import NavigationService from 'App/Services/NavigationService'
+import TagComponent from 'App/Components/TagComponent/TagComponent'
 
 class ActorScreen extends React.Component {
 
@@ -44,9 +45,10 @@ class ActorScreen extends React.Component {
   renderMovies() {
     return (
       this.state.movies.map((movie) => (
-        <TouchableOpacity style={Helpers.textRight} key={`movie-${movie.movieid}`}
+        <TouchableOpacity key={`movie-${movie.movieid}`}
                           onPress={() => this.setCurrentMovie(movie)}>
-          <AppText style={[styles.movieInfo, Helpers.textRight]}>{movie.title}</AppText>
+          <TagComponent text={movie.title} textColor='blue'
+                        style={{ backgroundColor: Colors.text, borderColor: Colors.primary }}/>
         </TouchableOpacity>
 
       ))
@@ -86,20 +88,22 @@ class ActorScreen extends React.Component {
             {this.renderEmptyStars()}
           </View>
           <View style={Metrics.mediumHorizontalPadding}>
-            <View style={[Helpers.row, {alignItems:'center'}]}>
-              <AppText style={[styles.info, {fontSize: 50}]}>{this.props.actor.googlehits} </AppText>
+            <View style={[Helpers.row, { alignItems: 'center' }]}>
+              <AppText style={[styles.info, { fontSize: 50 }]}>{this.props.actor.googlehits} </AppText>
               <AppText style={styles.smallTitle}>recherches google</AppText>
             </View>
-            <View style={[Helpers.row, {justifyContent:'flex-end', alignItems:'center'}]}>
+            <View style={[Helpers.row, { justifyContent: 'flex-end', alignItems: 'center' }]}>
               <AppText style={styles.smallTitle}>Note globale de </AppText>
-              <AppText style={[styles.info, {fontSize: 50}]}>{this.props.actor.ratingsum}</AppText>
+              <AppText style={[styles.info, { fontSize: 50 }]}>{this.props.actor.ratingsum}</AppText>
             </View>
-            <View style={[Helpers.row, {alignItems:'center'}]}>
-              <AppText style={[styles.info, {fontSize: 50}]}>{this.props.actor.moviecount} </AppText>
+            <View style={[Helpers.row, { alignItems: 'center' }]}>
+              <AppText style={[styles.info, { fontSize: 50 }]}>{this.props.actor.moviecount} </AppText>
               <AppText style={styles.smallTitle}>films tournés</AppText>
             </View>
             <AppText style={[styles.smallTitle, Helpers.textRight]}>Filmographie :</AppText>
-            {this.renderMovies()}
+            <View style={[Helpers.row, {flexWrap: 'wrap'}, Helpers.mainEnd]}>
+              {this.renderMovies()}
+            </View>
           </View>
         </View>
       </ScrollView>

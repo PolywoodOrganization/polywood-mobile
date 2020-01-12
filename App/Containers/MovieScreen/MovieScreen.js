@@ -1,5 +1,5 @@
 import React from 'react'
-import { Image, ScrollView, StatusBar, View, TouchableOpacity } from 'react-native'
+import { Image, ScrollView, StatusBar, TouchableOpacity, View } from 'react-native'
 import { connect } from 'react-redux'
 import { Colors, Helpers, Images } from 'App/Theme'
 import AppText from 'App/Components/MyAppText/MyAppText'
@@ -7,6 +7,7 @@ import styles from './MovieScreenStyle'
 import ActorsActions from 'App/Stores/Actors/Actions'
 import { ActorService } from 'App/Services/ActorService'
 import NavigationService from '../../Services/NavigationService'
+import TagComponent from '../../Components/TagComponent/TagComponent'
 
 class MovieScreen extends React.Component {
   constructor(props) {
@@ -41,8 +42,8 @@ class MovieScreen extends React.Component {
     })
   }
 
-  setCurrentActor(actor){
-    this.setState({loading: true})
+  setCurrentActor(actor) {
+    this.setState({ loading: true })
     this.props.setCurrentActor(actor)
     NavigationService.navigate('ActorScreen')
   }
@@ -52,7 +53,8 @@ class MovieScreen extends React.Component {
       this.state.actors.map((actor) =>
         (
           <TouchableOpacity key={actor.actorid} onPress={() => this.setCurrentActor(actor)}>
-          <AppText style={styles.actorInfo}>• {actor.name}</AppText>
+            <TagComponent text={actor.name} textColor='blue'
+                          style={{ backgroundColor: Colors.text, borderColor: Colors.primary }}/>
           </TouchableOpacity>
         ),
       )
