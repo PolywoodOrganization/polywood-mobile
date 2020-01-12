@@ -4,6 +4,7 @@ import styles from './HeaderComponentStyle'
 import { Helpers, Images, Metrics } from 'App/Theme'
 
 class Header extends Component {
+
   render() {
     return (
       <View style={[styles.header, Helpers.center, Helpers.fullWidth]}>
@@ -12,7 +13,8 @@ class Header extends Component {
           source={Images.logo}
         />
         <View style={styles.logoContainer}>
-          <TouchableOpacity>
+          <TouchableOpacity
+          onPress={() => this.props.logout()}>
             <Image
               style={styles.logo}
               source={Images.standby}

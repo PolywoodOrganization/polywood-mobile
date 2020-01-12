@@ -6,8 +6,10 @@ import Header from 'App/Components/HeaderComponent/HeaderComponent'
 import SearchBar from 'App/Components/SearchBarComponent/SearchBarComponent'
 import ResultList from 'App/Components/ResultListComponent/ResultListComponent'
 import MoviesActions from 'App/Stores/Movies/Actions'
+import AuthActions from 'App/Stores/Auth/Actions'
 import TagComponent from 'App/Components/TagComponent/TagComponent'
 import SearchValueActions from 'App/Stores/SearchValue/Actions'
+import NavigationService from '../../Services/NavigationService'
 
 class HomeScreen extends React.Component {
   constructor(props) {
@@ -33,10 +35,15 @@ class HomeScreen extends React.Component {
     this.props.getMovies(this.props.token, nextPage)
   }
 
+  logoutAndRedirect() {
+    this.props.logout()
+    NavigationService.navigateAndReset('MainScreen')
+  }
+
   render() {
     return (
       <View style={[Helpers.fill, Helpers.backgroundMain]}>
-        <Header/>
+        <Header logout={() => this.logoutAndRedirect()}/>
         <SearchBar/>
         <View style={Helpers.center}>
           {this.props.filterGenre !== '' &&
@@ -70,6 +77,7 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
   getMovies: (token, page) => dispatch(MoviesActions.movies(token, page)),
   setGenreFilter: (genre) => dispatch(SearchValueActions.setGenreFilter(genre)),
+  logout: () => dispatch(AuthActions.logout())
 
 })
 

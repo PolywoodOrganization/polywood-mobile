@@ -22,9 +22,15 @@ export const  loginSuccess = (state, { data }) => ({
   LoginError: null
 })
 
+export const logout = (state) => ({
+  ...state,
+  token: null,
+})
+
 
 export const reducer = createReducer(INITIAL_STATE, {
   [AuthTypes.LOGIN_LOADING]: loginLoading,
   [AuthTypes.LOGIN_SUCCESS]: loginSuccess,
   [AuthTypes.LOGIN_FAILURE]: loginFailure,
+  [AuthTypes.LOGOUT]: logout,
 })

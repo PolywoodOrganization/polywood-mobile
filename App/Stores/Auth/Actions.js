@@ -5,6 +5,7 @@ const {Types, Creators} = createActions({
   loginLoading: null,
   loginSuccess: ['data'],
   loginFailure:['error'],
+  logout: null,
 
 })
 
