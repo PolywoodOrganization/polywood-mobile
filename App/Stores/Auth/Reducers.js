@@ -11,13 +11,15 @@ export const loginLoading = (state) => ({
 export const loginFailure = (state, { error }) => ({
   ...state,
   token: null,
+  currentUser: null,
   loginLoading: false,
   loginError: error,
 })
 
 export const  loginSuccess = (state, { data }) => ({
   ...state,
-  token: data,
+  token: data.token,
+  currentUser: data.user,
   loginLoading: false,
   LoginError: null
 })
@@ -25,6 +27,7 @@ export const  loginSuccess = (state, { data }) => ({
 export const logout = (state) => ({
   ...state,
   token: null,
+  currentUser: null,
 })
 
 

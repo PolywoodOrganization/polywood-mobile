@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { Image, TouchableOpacity, View } from 'react-native'
 import styles from './HeaderComponentStyle'
 import { Helpers, Images, Metrics } from 'App/Theme'
+import NavigationService from '../../Services/NavigationService'
 
 class Header extends Component {
 
@@ -20,7 +21,8 @@ class Header extends Component {
               source={Images.standby}
             />
           </TouchableOpacity>
-          <TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => NavigationService.navigate('ProfileScreen')}>
             <Image
               style={styles.logo}
               source={Images.profile}
