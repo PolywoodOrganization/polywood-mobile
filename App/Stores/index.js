@@ -15,8 +15,7 @@ export default () => {
     searchValue: SearchValueReducer,
     auth: AuthReducer,
     movies: MoviesReducer,
-    actors: ActorsReducer
-
+    actors: ActorsReducer,
   })
 
   return configureStore(rootReducer, rootSaga)

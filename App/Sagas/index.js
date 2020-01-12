@@ -5,8 +5,8 @@ import { MoviesType } from 'App/Stores/Movies/Actions'
 import { ActorsType } from 'App/Stores/Actors/Actions'
 import { startup } from './StartupSaga'
 import { login } from './AuthSaga'
-import { getMovies } from './MovieSaga'
-import { getActor } from './ActorSaga'
+import { getCasting, getMovies } from './MovieSaga'
+import { getActor, getFilmo } from './ActorSaga'
 
 export default function* root() {
   yield all([
@@ -18,5 +18,7 @@ export default function* root() {
     takeLatest(AuthTypes.LOGIN, login),
     takeLatest(MoviesType.MOVIES, getMovies),
     takeLatest(ActorsType.GET_ACTOR, getActor),
+    takeLatest(ActorsType.GET_FILMO, getFilmo),
+    takeLatest(MoviesType.GET_CASTING, getCasting),
   ])
 }

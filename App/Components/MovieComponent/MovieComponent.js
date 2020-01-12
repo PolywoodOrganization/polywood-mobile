@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { ActivityIndicator, Image, TouchableOpacity, View } from 'react-native'
 import styles from './MovieComponentStyle'
-import { Colors, Helpers, Metrics, Images } from 'App/Theme'
+import { Colors, Helpers, Images, Metrics } from 'App/Theme'
 import AppText from 'App/Components/MyAppText/MyAppText'
 import { MovieService } from '../../Services/MovieService'
 import { connect } from 'react-redux'
@@ -52,7 +52,7 @@ class Movie extends Component {
   }
 
   onDetails() {
-    this.props.setCurrentMovie({...this.props.movie, image : this.state.image})
+    this.props.setCurrentMovie({ ...this.props.movie, image: this.state.image })
     NavigationService.navigate('MovieScreen')
   }
 
@@ -68,19 +68,32 @@ class Movie extends Component {
       ))
   }
 
+  formatTitle(title) {
+    if (title) {
+      if (title.length <= 30) {
+        return title.toUpperCase()
+      }
+      let subString = title.substr(0, 29)
+      return (
+        subString.substr(0, subString.lastIndexOf(' ')).toUpperCase()
+        + '...')
+    }
+  };
+
   render() {
     return (
       <View style={[styles.movieContainer, Helpers.center, Metrics.smallHorizontalPadding]}>
         {this.renderImage()}
         <View style={Helpers.fillCol}>
-          <AppText style={[styles.titleText, Helpers.textRight]}>{this.props.movie.title.toUpperCase()}</AppText>
+          <AppText style={[styles.titleText, Helpers.textRight]}>{this.formatTitle(this.props.movie.title)}</AppText>
           <AppText
             style={[styles.descText, styles.yearText, Helpers.textRight]}>{this.props.movie.releaseyear}</AppText>
           <View style={[Helpers.row, { flexWrap: 'wrap', justifyContent: 'flex-end' }]}>
             {this.renderGenre()}
           </View>
           <TouchableOpacity
-            onPress={() => this.onDetails()}>
+            onPress={() => this.onDetails()}
+            disabled={this.state.loading}>
             <AppText style={[styles.crossText, Helpers.textRight]}>+</AppText>
           </TouchableOpacity>
         </View>
@@ -96,7 +109,7 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
   getMovies: (token, page, filterType, filter) => dispatch(MoviesActions.movies(token, page, filterType, filter)),
   setGenreFilter: (genre) => dispatch(SearchValueActions.setGenreFilter(genre)),
-  setCurrentMovie: (movie) => dispatch(MoviesActions.setCurrentMovie(movie))
+  setCurrentMovie: (movie) => dispatch(MoviesActions.setCurrentMovie(movie)),
 })
 
 export default connect(

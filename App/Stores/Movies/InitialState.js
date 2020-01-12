@@ -3,4 +3,7 @@ export const INITIAL_STATE = {
   moviesLoading: false,
   moviesError: null,
   currentMovie: null,
+  casting: [],
+  castingLoading: false,
+  castingError: null,
 }

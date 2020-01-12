@@ -1,13 +1,13 @@
 import React from 'react'
-import { TouchableOpacity, View } from 'react-native'
+import { TouchableOpacity, View, ActivityIndicator } from 'react-native'
 import { connect } from 'react-redux'
-import { Helpers } from 'App/Theme'
+import { Colors, Helpers, Metrics } from 'App/Theme'
 import Header from 'App/Components/HeaderComponent/HeaderComponent'
 import SearchBar from 'App/Components/SearchBarComponent/SearchBarComponent'
 import ResultList from 'App/Components/ResultListComponent/ResultListComponent'
 import MoviesActions from 'App/Stores/Movies/Actions'
 import TagComponent from 'App/Components/TagComponent/TagComponent'
-import SearchValueActions from '../../Stores/SearchValue/Actions'
+import SearchValueActions from 'App/Stores/SearchValue/Actions'
 
 class HomeScreen extends React.Component {
   constructor(props) {
@@ -44,11 +44,13 @@ class HomeScreen extends React.Component {
             this.getMoviesAndReset()
           }}>
             <TagComponent
+              style={Metrics.smallVerticalMargin}
               text={this.props.filterGenre}
               cancelable={true}
             />
           </TouchableOpacity>}
         </View>
+        {this.props.moviesLoading && <ActivityIndicator  size='large' color={Colors.secondary}/>}
         <ResultList results={this.props.movies}
                     getNextPage={this.getNextPage.bind(this)}
                     refreshing={this.props.moviesLoading}/>

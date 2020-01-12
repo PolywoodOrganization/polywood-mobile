@@ -7,6 +7,11 @@ const {Types, Creators} = createActions({
   moviesFailure:['error'],
   resetMovies: null,
   setCurrentMovie: ['movie'],
+  getCasting: ['token', 'id'],
+  getCastingSuccess: ['data'],
+  getCastingFailure: ['error'],
+  getCastingLoading: null,
+
 
 })
 

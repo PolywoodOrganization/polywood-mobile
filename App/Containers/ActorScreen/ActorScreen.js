@@ -1,25 +1,26 @@
 import React from 'react'
-import { Image, ScrollView, StatusBar, TouchableOpacity, View } from 'react-native'
+import { ActivityIndicator, Image, ScrollView, StatusBar, TouchableOpacity, View } from 'react-native'
 import { connect } from 'react-redux'
 import { Colors, Helpers, Images, Metrics } from 'App/Theme'
 import AppText from 'App/Components/MyAppText/MyAppText'
 import styles from './ActorScreenStyle'
-import { ActorService } from 'App/Services/ActorService'
 import { MovieService } from 'App/Services/MovieService'
 import MoviesActions from 'App/Stores/Movies/Actions'
+import ActorsActions from 'App/Stores/Actors/Actions'
 import NavigationService from 'App/Services/NavigationService'
+import TagComponent from 'App/Components/TagComponent/TagComponent'
 
 class ActorScreen extends React.Component {
 
-  constructor(props) {
-    super(props)
-    this.state = {
-      movies: [],
-    }
+  componentDidMount() {
+    this.props.getFilmo(this.props.token, this.props.actor.actorid)
   }
 
-  componentDidMount() {
-    this.fetchMovies()
+  componentDidUpdate(prevProps) {
+    console.log(this.props.filmo)
+    if (prevProps.actor.actorid !== this.props.actor.actorid) {
+      this.props.getFilmo(this.props.token, this.props.actor.actorid)
+    }
   }
 
   setCurrentMovie(movie) {
@@ -33,20 +34,19 @@ class ActorScreen extends React.Component {
     })
   }
 
-  fetchMovies() {
-    ActorService.getFilmoById(this.props.token, this.props.actor.actorid).then((movies) => {
-      this.setState({ movies: movies })
-    }).catch((error) => {
-      console.log({ ...error })
-    })
-  }
-
   renderMovies() {
+    if (this.props.filmoLoading) {
+      return (<ActivityIndicator size={'large'} color={Colors.text}/>)
+    }
+    if(this.props.filmo.length === 0 && !this.props.filmoLoading) {
+      return (<AppText style={styles.info}>Non renseigné</AppText>)
+    }
     return (
-      this.state.movies.map((movie) => (
-        <TouchableOpacity style={Helpers.textRight} key={`movie-${movie.movieid}`}
+      this.props.filmo.map((movie) => (
+        <TouchableOpacity key={`movie-${movie.movieid}`}
                           onPress={() => this.setCurrentMovie(movie)}>
-          <AppText style={[styles.movieInfo, Helpers.textRight]}>{movie.title}</AppText>
+          <TagComponent text={movie.title} textColor='blue'
+                        style={{ backgroundColor: Colors.text, borderColor: Colors.primary }}/>
         </TouchableOpacity>
 
       ))
@@ -55,7 +55,7 @@ class ActorScreen extends React.Component {
 
   renderStars() {
     return (
-      Array(this.props.actor.normalizedrating).fill().map((value, index) =>
+      Array(Math.trunc(this.props.actor.normalizedrating/2)).fill().map((value, index) =>
         (
           <Image key={`star-${index}`} source={Images.star} style={{ width: 30, height: 30 }}/>
         ),
@@ -65,7 +65,7 @@ class ActorScreen extends React.Component {
 
   renderEmptyStars() {
     return (
-      Array(5 - this.props.actor.normalizedrating).fill().map((value, index) =>
+      Array(5 - Math.trunc(this.props.actor.normalizedrating/2)).fill().map((value, index) =>
         (
           <Image key={`star-${index}`} source={Images.starEmpty} style={{ width: 30, height: 30 }}/>
         ),
@@ -86,20 +86,22 @@ class ActorScreen extends React.Component {
             {this.renderEmptyStars()}
           </View>
           <View style={Metrics.mediumHorizontalPadding}>
-            <View style={[Helpers.row, {alignItems:'center'}]}>
-              <AppText style={[styles.info, {fontSize: 50}]}>{this.props.actor.googlehits} </AppText>
+            <View style={[Helpers.row, { alignItems: 'center' }]}>
+              <AppText style={[styles.info, { fontSize: 50 }]}>{this.props.actor.googlehits} </AppText>
               <AppText style={styles.smallTitle}>recherches google</AppText>
             </View>
-            <View style={[Helpers.row, {justifyContent:'flex-end', alignItems:'center'}]}>
+            <View style={[Helpers.row, { justifyContent: 'flex-end', alignItems: 'center' }]}>
               <AppText style={styles.smallTitle}>Note globale de </AppText>
-              <AppText style={[styles.info, {fontSize: 50}]}>{this.props.actor.ratingsum}</AppText>
+              <AppText style={[styles.info, { fontSize: 50 }]}>{this.props.actor.ratingsum}</AppText>
             </View>
-            <View style={[Helpers.row, {alignItems:'center'}]}>
-              <AppText style={[styles.info, {fontSize: 50}]}>{this.props.actor.moviecount} </AppText>
+            <View style={[Helpers.row, { alignItems: 'center' }]}>
+              <AppText style={[styles.info, { fontSize: 50 }]}>{this.props.actor.moviecount} </AppText>
               <AppText style={styles.smallTitle}>films tournés</AppText>
             </View>
             <AppText style={[styles.smallTitle, Helpers.textRight]}>Filmographie :</AppText>
-            {this.renderMovies()}
+            <View style={[Helpers.row, { flexWrap: 'wrap' }, Helpers.mainEnd]}>
+              {this.renderMovies()}
+            </View>
           </View>
         </View>
       </ScrollView>
@@ -110,10 +112,14 @@ class ActorScreen extends React.Component {
 const mapStateToProps = (state) => ({
   actor: state.actors.currentActor,
   token: state.auth.token,
+  filmoLoading: state.actors.filmoLoading,
+  filmo: state.actors.filmo,
 })
 
 const mapDispatchToProps = (dispatch) => ({
   setCurrentMovie: (movie) => dispatch(MoviesActions.setCurrentMovie(movie)),
+  getFilmo: (token, id) => dispatch(ActorsActions.getFilmo(token, id)),
+
 })
 
 export default connect(

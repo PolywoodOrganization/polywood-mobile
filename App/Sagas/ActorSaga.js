@@ -13,3 +13,14 @@ export function* getActor({ token, id }) {
     DropDownHolder.dropDown.alertWithType('error', 'Error', 'A problem occurred while fetching actors')
   }
 }
+
+export function* getFilmo({ token, id }) {
+  yield put(ActorsActions.getFilmoLoading())
+  const response = yield call(ActorService.getFilmoById, token, id)
+  if (response) {
+    yield put(ActorsActions.getFilmoSuccess(response))
+  } else {
+    yield put(ActorsActions.getFilmoFailure('Error fetching actors'))
+    DropDownHolder.dropDown.alertWithType('error', 'Error', 'A problem occurred while fetching actors')
+  }
+}

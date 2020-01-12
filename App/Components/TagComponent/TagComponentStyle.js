@@ -11,8 +11,12 @@ export default StyleSheet.create({
     borderColor: Colors.secondary,
     borderWidth: 1,
   },
-  text: {
+  pinkText: {
     color: Colors.secondary,
     fontSize: 10,
   },
+  blueText : {
+    color: Colors.primary,
+    fontSize: 15,
+  }
 })
