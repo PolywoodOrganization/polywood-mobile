@@ -12,4 +12,6 @@ export default {
   star: require('App/Assets/Images/star.png'),
   profile: require('App/Assets/Images/profile.png'),
   standby: require('App/Assets/Images/standby.png'),
+  heart: require('App/Assets/Images/heart.png'),
+  heartEmpty: require('App/Assets/Images/heart-empty.png'),
 }

@@ -5,6 +5,7 @@ import { reducer as SearchValueReducer } from './SearchValue/Reducers'
 import { reducer as AuthReducer } from './Auth/Reducers'
 import { reducer as MoviesReducer } from './Movies/Reducers'
 import { reducer as ActorsReducer } from './Actors/Reducers'
+import { reducer as FavoritesReducer } from './Favorites/Reducers'
 
 export default () => {
   const rootReducer = combineReducers({
@@ -16,6 +17,7 @@ export default () => {
     auth: AuthReducer,
     movies: MoviesReducer,
     actors: ActorsReducer,
+    favorites: FavoritesReducer,
   })
 
   return configureStore(rootReducer, rootSaga)

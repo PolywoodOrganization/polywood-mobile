@@ -10,14 +10,14 @@ const actorApiClient = axios.create({
   timeout: 3000,
 })
 
-actorApiClient.interceptors.request.use((req) => {
-  console.log(req)
-  return req
-}, error => Promise.reject(error))
-actorApiClient.interceptors.response.use((res) => {
-  console.log(res)
-  return res
-}, error => Promise.reject(error))
+// actorApiClient.interceptors.request.use((req) => {
+//   console.log(req)
+//   return req
+// }, error => Promise.reject(error))
+// actorApiClient.interceptors.response.use((res) => {
+//   console.log(res)
+//   return res
+// }, error => Promise.reject(error))
 
 function getActorById(token, id) {
   return actorApiClient

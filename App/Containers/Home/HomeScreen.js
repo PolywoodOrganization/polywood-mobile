@@ -7,6 +7,7 @@ import SearchBar from 'App/Components/SearchBarComponent/SearchBarComponent'
 import ResultList from 'App/Components/ResultListComponent/ResultListComponent'
 import MoviesActions from 'App/Stores/Movies/Actions'
 import AuthActions from 'App/Stores/Auth/Actions'
+import FavoritesActions from 'App/Stores/Favorites/Actions'
 import TagComponent from 'App/Components/TagComponent/TagComponent'
 import SearchValueActions from 'App/Stores/SearchValue/Actions'
 import NavigationService from '../../Services/NavigationService'
@@ -21,6 +22,7 @@ class HomeScreen extends React.Component {
 
   componentDidMount() {
     this.props.getMovies(this.props.token, this.state.page)
+    this.props.getFavorites(this.props.token, this.props.me.iduser)
   }
 
   getMoviesAndReset() {
@@ -73,13 +75,14 @@ const mapStateToProps = (state) => ({
   token: state.auth.token,
   moviesLoading: state.movies.moviesLoading,
   filterGenre: state.searchValue.filterGenre,
+  me: state.auth.currentUser,
 })
 
 const mapDispatchToProps = (dispatch) => ({
   getMovies: (token, page) => dispatch(MoviesActions.movies(token, page)),
   setGenreFilter: (genre) => dispatch(SearchValueActions.setGenreFilter(genre)),
-  logout: () => dispatch(AuthActions.logout())
-
+  logout: () => dispatch(AuthActions.logout()),
+  getFavorites: (token, iduser) => dispatch(FavoritesActions.favorites(token, iduser)),
 })
 
 export default connect(
