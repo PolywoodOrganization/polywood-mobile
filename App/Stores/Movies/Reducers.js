@@ -38,10 +38,35 @@ export const setCurrentMovie = (state, { movie }) => {
   }
 }
 
+export const getCastingLoading = (state) => ({
+  ...state,
+  castingLoading: true,
+  castingError: null,
+})
+
+export const getCastingFailure = (state, { error }) => ({
+  ...state,
+  casting: [],
+  castingLoading: false,
+  castingError: error,
+})
+
+export const getCastingSuccess = (state, { data }) => {
+  return ({
+    ...state,
+    casting: data,
+    castingLoading: false,
+    castingError: null,
+  })
+}
+
 export const reducer = createReducer(INITIAL_STATE, {
   [MoviesType.MOVIES_LOADING]: moviesLoading,
   [MoviesType.MOVIES_SUCCESS]: moviesSuccess,
   [MoviesType.MOVIES_FAILURE]: moviesFailure,
   [MoviesType.RESET_MOVIES]: resetMovies,
   [MoviesType.SET_CURRENT_MOVIE]: setCurrentMovie,
+  [MoviesType.GET_CASTING_SUCCESS]: getCastingSuccess,
+  [MoviesType.GET_CASTING_LOADING]: getCastingLoading,
+  [MoviesType.GET_CASTING_FAILURE]: getCastingFailure,
 })

@@ -27,9 +27,32 @@ export const setCurrentActor = (state, { actor }) => ({
   currentActor: actor,
 })
 
+export const getFilmoLoading = (state) => ({
+  ...state,
+  filmoLoading: true,
+  filmoError: null,
+})
+
+export const getFilmoFailure = (state, { error }) => ({
+  ...state,
+  filmo: [],
+  filmoLoading: false,
+  filmoError: error,
+})
+
+export const getFilmoSuccess = (state, { data }) => ({
+  ...state,
+  filmo: data,
+  filmoLoading: false,
+  filmoError: null,
+})
+
 export const reducer = createReducer(INITIAL_STATE, {
   [ActorsType.ACTOR_LOADING]: actorLoading,
   [ActorsType.ACTOR_SUCCESS]: actorSuccess,
   [ActorsType.ACTOR_FAILURE]: actorFailure,
   [ActorsType.SET_CURRENT_ACTOR]: setCurrentActor,
+  [ActorsType.GET_FILMO_SUCCESS]: getFilmoSuccess,
+  [ActorsType.GET_FILMO_FAILURE]: getFilmoFailure,
+  [ActorsType.GET_FILMO_LOADING]: getFilmoLoading,
 })

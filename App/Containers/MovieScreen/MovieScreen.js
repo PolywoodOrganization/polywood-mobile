@@ -1,25 +1,24 @@
 import React from 'react'
-import { Image, ScrollView, StatusBar, TouchableOpacity, View } from 'react-native'
+import { ActivityIndicator, Image, ScrollView, StatusBar, TouchableOpacity, View } from 'react-native'
 import { connect } from 'react-redux'
 import { Colors, Helpers, Images } from 'App/Theme'
 import AppText from 'App/Components/MyAppText/MyAppText'
 import styles from './MovieScreenStyle'
 import ActorsActions from 'App/Stores/Actors/Actions'
-import { ActorService } from 'App/Services/ActorService'
-import NavigationService from '../../Services/NavigationService'
-import TagComponent from '../../Components/TagComponent/TagComponent'
+import MoviesActions from 'App/Stores/Movies/Actions'
+import NavigationService from 'App/Services/NavigationService'
+import TagComponent from 'App/Components/TagComponent/TagComponent'
 
 class MovieScreen extends React.Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      actors: [],
-      loading: false,
-    }
-  }
 
   componentDidMount() {
-    this.fetchActors()
+    this.props.getCasting(this.props.token, this.props.movie.movieid)
+  }
+
+  componentDidUpdate(prevProps) {
+    if (prevProps.movie !== this.props.movie) {
+      this.props.getCasting(this.props.token, this.props.movie.movieid)
+    }
   }
 
   renderList(list) {
@@ -27,30 +26,25 @@ class MovieScreen extends React.Component {
     return (
       toRender.map((item) =>
         (
-          <AppText key={item.trim()} style={styles.info}>• {item.trim()}</AppText>
+          <AppText key={item.trim()} style={styles.info}>• {item.trim().replace(/ *\([^)]*\) */g, "")}</AppText>
         ),
       ))
   }
 
-  fetchActors() {
-    this.props.movie.castingsByMovieid.map((item) => {
-      ActorService.getActorById(this.props.token, item.actorid).then((actor) => {
-        this.setState({ actors: [...this.state.actors, actor] })
-      }).catch((error) => {
-        console.log({ ...error })
-      })
-    })
-  }
-
   setCurrentActor(actor) {
-    this.setState({ loading: true })
     this.props.setCurrentActor(actor)
     NavigationService.navigate('ActorScreen')
   }
 
   renderActor() {
+    if (this.props.castingLoading) {
+      return (<ActivityIndicator size={'large'} color={Colors.text}/>)
+    }
+    if(this.props.casting.length === 0 && !this.props.castingLoading) {
+      return (<AppText style={styles.info}>Non renseigné</AppText>)
+    }
     return (
-      this.state.actors.map((actor) =>
+      this.props.casting.map((actor) =>
         (
           <TouchableOpacity key={actor.actorid} onPress={() => this.setCurrentActor(actor)}>
             <TagComponent text={actor.name} textColor='blue'
@@ -79,7 +73,7 @@ class MovieScreen extends React.Component {
             </View>
             <View>
               <AppText style={styles.smallTitle}>Metteur en scène : </AppText>
-              <AppText style={styles.info}>{this.props.movie.directors}</AppText>
+              {this.renderList(this.props.movie.directors)}
               <AppText style={styles.smallTitle}>Date de sortie : </AppText>
               <AppText style={styles.info}>{this.props.movie.releasedate}</AppText>
               <AppText style={styles.smallTitle}>Genre :</AppText>
@@ -113,11 +107,13 @@ class MovieScreen extends React.Component {
 const mapStateToProps = (state) => ({
   movie: state.movies.currentMovie,
   token: state.auth.token,
+  castingLoading: state.movies.castingLoading,
+  casting: state.movies.casting,
 })
 
 const mapDispatchToProps = (dispatch) => ({
   setCurrentActor: (actor) => dispatch(ActorsActions.setCurrentActor(actor)),
-  getActor: (token, id) => dispatch(ActorsActions.getActor(token, id)),
+  getCasting: (token, id) => dispatch(MoviesActions.getCasting(token, id)),
 })
 
 export default connect(

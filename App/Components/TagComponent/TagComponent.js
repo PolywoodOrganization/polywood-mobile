@@ -7,7 +7,7 @@ const TagComponent = (props) => {
   let textStyle = props.textColor === 'blue' ? styles.blueText : styles.pinkText
   return (
   <View style={[styles.tagContainer, props.style]}>
-    {props.cancelable ? <AppText style={styles.text}>{props.text} X</AppText> :
+    {props.cancelable ? <AppText style={textStyle}>{props.text} X</AppText> :
       <AppText style={textStyle}>{props.text}</AppText>}
   </View>
 )}

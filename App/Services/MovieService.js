@@ -55,9 +55,19 @@ function filterGenre(token, genre) {
     .catch((error) => console.log(error))
 }
 
+function getCastingById(token, id) {
+  return movieApiClient
+    .get(`/movies/casting/${id}`, { headers: { 'Authorization': `Bearer ${token}` } })
+    .then((response) => {
+      return response.data
+    })
+    .catch((error) => console.log(error))
+}
+
 export const MovieService = {
   getMovies,
   getImage,
   filterTitle,
-  filterGenre
+  filterGenre,
+  getCastingById,
 }
