@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
-import { View, Image } from 'react-native'
+import { Image, TouchableOpacity, View } from 'react-native'
 import styles from './HeaderComponentStyle'
-import { Helpers, Images } from 'App/Theme'
+import { Helpers, Images, Metrics } from 'App/Theme'
 
 class Header extends Component {
   render() {
@@ -11,6 +11,20 @@ class Header extends Component {
           style={[styles.image, Helpers.fullSize]}
           source={Images.logo}
         />
+        <View style={styles.logoContainer}>
+          <TouchableOpacity>
+            <Image
+              style={styles.logo}
+              source={Images.standby}
+            />
+          </TouchableOpacity>
+          <TouchableOpacity>
+            <Image
+              style={styles.logo}
+              source={Images.profile}
+            />
+          </TouchableOpacity>
+        </View>
       </View>
     )
   }

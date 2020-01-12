@@ -1,4 +1,5 @@
 import { StyleSheet } from 'react-native'
+import { Helpers, Metrics } from 'App/Theme'
 
 export default StyleSheet.create({
   header: {
@@ -7,4 +8,17 @@ export default StyleSheet.create({
   image: {
     resizeMode: 'cover',
   },
+  logo: {
+    width: 30,
+    height: 30,
+    resizeMode: 'contain'
+  },
+  logoContainer: {
+    ...Helpers.row,
+    ...Helpers.fullWidth,
+    ...Helpers.mainSpaceBetween,
+    ...Metrics.smallHorizontalPadding,
+    position: 'absolute',
+    bottom: 10,
+  }
 })
