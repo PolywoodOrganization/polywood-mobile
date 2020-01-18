@@ -17,7 +17,6 @@ class ActorScreen extends React.Component {
   }
 
   componentDidUpdate(prevProps) {
-    console.log(this.props.filmo)
     if (prevProps.actor.actorid !== this.props.actor.actorid) {
       this.props.getFilmo(this.props.token, this.props.actor.actorid)
     }

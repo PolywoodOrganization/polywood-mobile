@@ -1,9 +1,11 @@
 import React, { Component } from 'react'
-import { View, Image } from 'react-native'
+import { Image, TouchableOpacity, View } from 'react-native'
 import styles from './HeaderComponentStyle'
-import { Helpers, Images } from 'App/Theme'
+import { Helpers, Images, Metrics } from 'App/Theme'
+import NavigationService from '../../Services/NavigationService'
 
 class Header extends Component {
+
   render() {
     return (
       <View style={[styles.header, Helpers.center, Helpers.fullWidth]}>
@@ -11,6 +13,22 @@ class Header extends Component {
           style={[styles.image, Helpers.fullSize]}
           source={Images.logo}
         />
+        <View style={styles.logoContainer}>
+          <TouchableOpacity
+          onPress={() => this.props.logout()}>
+            <Image
+              style={styles.logo}
+              source={Images.standby}
+            />
+          </TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => NavigationService.navigate('ProfileScreen')}>
+            <Image
+              style={styles.logo}
+              source={Images.profile}
+            />
+          </TouchableOpacity>
+        </View>
       </View>
     )
   }

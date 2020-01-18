@@ -1,5 +1,5 @@
 import React from 'react'
-import { Image, KeyboardAvoidingView, View } from 'react-native'
+import { Image, KeyboardAvoidingView, StatusBar, View } from 'react-native'
 import { Colors, Helpers, Images, Metrics } from 'App/Theme'
 import styles from './LoginScreenStyle'
 import InputComponent from 'App/Components/InputComponent/InputComponent'
@@ -34,6 +34,7 @@ class LoginScreen extends React.Component {
       <KeyboardAvoidingView
         style={styles.container}
         behavior={Platform.OS === 'ios' ? 'padding' : null} enabled>
+        <StatusBar backgroundColor={Colors.primary} barStyle="light-content"/>
         <View style={styles.logoContainer}>
           <Image style={Helpers.fullSize} source={Images.logo} resizeMode={'cover'}/>
         </View>

@@ -10,4 +10,10 @@ export default {
   actor: require('App/Assets/Images/actor.png'),
   starEmpty: require('App/Assets/Images/star-empty.png'),
   star: require('App/Assets/Images/star.png'),
+  profile: require('App/Assets/Images/profile.png'),
+  standby: require('App/Assets/Images/standby.png'),
+  heart: require('App/Assets/Images/heart.png'),
+  heartEmpty: require('App/Assets/Images/heart-empty.png'),
+  edit: require('App/Assets/Images/edit.png'),
+  bin: require('App/Assets/Images/bin.png'),
 }

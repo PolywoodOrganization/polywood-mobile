@@ -64,10 +64,20 @@ function getCastingById(token, id) {
     .catch((error) => console.log(error))
 }
 
+function getMovieById(token, id) {
+  return movieApiClient
+    .get(`/movies/${id}`, { headers: { 'Authorization': `Bearer ${token}` } })
+    .then((response) => {
+      return response.data
+    })
+    .catch((error) => console.log(error))
+}
+
 export const MovieService = {
   getMovies,
   getImage,
   filterTitle,
   filterGenre,
   getCastingById,
+  getMovieById,
 }
