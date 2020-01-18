@@ -7,6 +7,7 @@ import { connect } from 'react-redux'
 import AuthActions from 'App/Stores/Auth/Actions'
 import { PropTypes } from 'prop-types'
 import ButtonComponent from 'App/Components/ButtonComponent/ButtonComponent'
+import NavigationService from 'App/Services/NavigationService'
 
 class LoginScreen extends React.Component {
 
@@ -58,6 +59,14 @@ class LoginScreen extends React.Component {
         <ButtonComponent
           onPress={() => this.props.login(this.state.login, this.state.password)}
           title='CONNEXION'
+          isLoading={this.props.loginLoading}
+          color={Colors.secondary}
+        />
+        <ButtonComponent
+          onPress={() => NavigationService.navigate('SignupScreen')}
+          style={{backgroundColor: 'transparent', color: Colors.text}}
+          textStyle={{textDecorationLine: 'underline'}}
+          title='Créer un compte'
           isLoading={this.props.loginLoading}
           color={Colors.secondary}
         />

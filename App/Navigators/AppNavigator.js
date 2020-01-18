@@ -6,6 +6,7 @@ import LoginScreen from 'App/Containers/LoginScreen/LoginScreen'
 import MovieScreen from 'App/Containers/MovieScreen/MovieScreen'
 import ActorScreen from 'App/Containers/ActorScreen/ActorScreen'
 import ProfileScreen from 'App/Containers/ProfileScreen/ProfileScreen'
+import SignupScreen from 'App/Containers/SignupScreen/SignupScreen'
 
 /**
  * The root screen contains the application's navigation.
@@ -20,6 +21,7 @@ const StackNavigator = createStackNavigator(
     // The main application screen is our "ExampleScreen". Feel free to replace it with your
     // own screen and remove the example.
     MainScreen: LoginScreen,
+    SignupScreen: SignupScreen,
     HomeScreen: HomeScreen,
     MovieScreen: MovieScreen,
     ActorScreen: ActorScreen,

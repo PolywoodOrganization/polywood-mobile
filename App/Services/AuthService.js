@@ -28,6 +28,16 @@ function login(login, password) {
     .catch((error) => console.log(error))
 }
 
+function signup(firstName, lastName, login, password) {
+  return userApiClient
+    .post('/users',  { firstname: firstName, lastname: lastName, login, password })
+    .then((response) => {
+      return response.data
+    })
+    .catch((error) => console.log(error))
+}
+
 export const AuthService = {
-  login
+  login,
+  signup,
 }

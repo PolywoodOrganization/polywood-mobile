@@ -5,7 +5,7 @@ import { MoviesType } from 'App/Stores/Movies/Actions'
 import { ActorsType } from 'App/Stores/Actors/Actions'
 import { FavoritesType } from 'App/Stores/Favorites/Actions'
 import { startup } from './StartupSaga'
-import { login } from './AuthSaga'
+import { login, signup } from './AuthSaga'
 import { getCasting, getMovies } from './MovieSaga'
 import { getActor, getFilmo } from './ActorSaga'
 import { addFavorite, getFavorites, removeFavorite, updateFavorite } from './FavoriteSaga'
@@ -17,7 +17,9 @@ export default function* root() {
      */
     // Run the startup saga when the application starts
     takeLatest(StartupTypes.STARTUP, startup),
+    takeLatest(AuthTypes.SIGNUP, signup),
     takeLatest(AuthTypes.LOGIN, login),
+    takeLatest(MoviesType.MOVIES, getMovies),
     takeLatest(MoviesType.MOVIES, getMovies),
     takeLatest(ActorsType.GET_ACTOR, getActor),
     takeLatest(ActorsType.GET_FILMO, getFilmo),

@@ -5,6 +5,12 @@ const {Types, Creators} = createActions({
   loginLoading: null,
   loginSuccess: ['data'],
   loginFailure:['error'],
+
+  signup: ['firstName', 'lastName', 'login', 'password'],
+  signupLoading: null,
+  signupSuccess: null,
+  signupFailure:['error'],
+
   logout: null,
 
 })

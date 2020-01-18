@@ -16,3 +16,16 @@ export function* login({login, password}) {
     DropDownHolder.dropDown.alertWithType('error', 'Error', 'Login or password incorrect')
   }
 }
+
+export function* signup({firstName, lastName, login, password}) {
+  yield put(AuthActions.signupLoading())
+
+  const response = yield call(AuthService.signup, firstName, lastName, login, password)
+  if(response) {
+    yield put(AuthActions.signupSuccess())
+    NavigationService.navigateAndReset('MainScreen')
+  } else {
+    yield put(AuthActions.signupFailure('one field is not correct'))
+    DropDownHolder.dropDown.alertWithType('error', 'Error', 'One field is not correct')
+  }
+}
