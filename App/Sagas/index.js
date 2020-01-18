@@ -8,7 +8,7 @@ import { startup } from './StartupSaga'
 import { login } from './AuthSaga'
 import { getCasting, getMovies } from './MovieSaga'
 import { getActor, getFilmo } from './ActorSaga'
-import { addFavorite, getFavorites, removeFavorite } from './FavoriteSaga'
+import { addFavorite, getFavorites, removeFavorite, updateFavorite } from './FavoriteSaga'
 
 export default function* root() {
   yield all([
@@ -25,5 +25,6 @@ export default function* root() {
     takeLatest(FavoritesType.ADD_FAVORITE, addFavorite),
     takeLatest(FavoritesType.FAVORITES, getFavorites),
     takeLatest(FavoritesType.REMOVE_FAVORITE, removeFavorite),
+    takeLatest(FavoritesType.UPDATE_FAVORITE, updateFavorite),
   ])
 }

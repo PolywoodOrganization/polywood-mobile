@@ -10,9 +10,10 @@ const { Types, Creators } = createActions({
   addFavoriteLoading: null,
   addFavoriteFailure: ['error'],
   removeFavorite: ['token','id'],
-  removeFavoriteSuccess: ['data'],
+  removeFavoriteSuccess: ['removed'],
   removeFavoriteLoading: null,
   removeFavoriteFailure: ['error'],
+  updateFavorite: ['token', 'favorite']
 
 })
 

@@ -44,10 +44,12 @@ export default StyleSheet.create({
     ...ApplicationStyles.title1,
     ...Helpers.textCenter,
     ...Metrics.mediumVerticalMargin,
+    maxWidth: '70%'
   },
   row: {
     ...Helpers.rowCross,
     ...Helpers.scrollSpaceAround,
     ...Metrics.mediumVerticalMargin,
+    flexWrap: 'wrap',
   },
 })

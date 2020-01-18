@@ -30,10 +30,27 @@ export function* removeFavorite({ token, id}) {
   yield put(FavoritesActions.removeFavoriteLoading())
   const response = yield call(FavoritesService.removeFavorite, token, id)
   if (response.status === 200 || response.status === 204) {
-    yield put(FavoritesActions.removeFavoriteSuccess(response))
+    yield put(FavoritesActions.removeFavoriteSuccess(id))
     DropDownHolder.dropDown.alertWithType('success', 'Congrats !', 'This movie has been removed to your favorites successfully.')
   } else {
     yield put(FavoritesActions.addFavoriteFailure('Error adding favorite'))
     DropDownHolder.dropDown.alertWithType('error', 'Error', 'A problem occurred while removing the favorite')
   }
+}
+
+export function* updateFavorite({token, favorite}) {
+  let response = yield call(FavoritesService.removeFavorite, token, favorite.idmovie)
+  if(response) {
+    yield put(FavoritesActions.removeFavoriteSuccess(favorite.idmovie))
+    response = yield call(FavoritesService.addFavorite, token, favorite)
+    if(response) {
+      yield put(FavoritesActions.addFavoriteSuccess(response))
+      // response = yield call(FavoritesService.getFavorites, token, favorite.iduser)
+      // if(response) {
+      //   yield put(FavoritesActions.favoritesSuccess(response))
+      // }
+    }
+  }
+
+
 }

@@ -10,7 +10,7 @@ export const favoritesLoading = (state) => ({
 
 export const favoritesFailure = (state, { error }) => ({
   ...state,
-  favorites: null,
+  favorites: [],
   favoritesLoading: false,
   favoritesFailure: error,
 })
@@ -42,10 +42,11 @@ export const addFavoriteFailure = (state, { error }) => ({
   addFavoriteFailure: error,
 })
 
-export const removeFavoriteSuccess = (state) => ({
+export const removeFavoriteSuccess = (state, { removed }) => ({
   ...state,
   removeFavoriteLoading: false,
   removeFavoriteFailure: null,
+  favorites: state.favorites.filter((favorite) => favorite.idmovie !== removed)
 })
 
 export const removeFavoriteLoading = (state) => ({
