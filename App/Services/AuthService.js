@@ -37,7 +37,17 @@ function signup(firstName, lastName, login, password) {
     .catch((error) => console.log(error))
 }
 
+function updateUser(token, user) {
+  return userApiClient
+    .put(`/users/${user.iduser}`,  { ...user }, { headers: { 'Authorization': `Bearer ${token}` } })
+    .then((response) => {
+      return response.data
+    })
+    .catch((error) => console.log(error))
+}
+
 export const AuthService = {
   login,
   signup,
+  updateUser,
 }

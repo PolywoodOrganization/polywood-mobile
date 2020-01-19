@@ -54,7 +54,6 @@ class SignupScreen extends React.Component {
           <InputComponent
             placeholder='Prénom'
             onChangeText={(text) => this.handleChange('firstName', text)}
-            keyboardType={'text'}
             returnKeyType={'next'}
             onSubmitEditing={() => this.state.references.lastName.focus()}
             style={Metrics.smallVerticalMargin}
@@ -62,7 +61,6 @@ class SignupScreen extends React.Component {
           <InputComponent
             placeholder='Nom'
             onChangeText={(text) => this.handleChange('lastName', text)}
-            keyboardType={'text'}
             returnKeyType={'next'}
             onSubmitEditing={() => this.state.references.login.focus()}
             style={Metrics.smallVerticalMargin}

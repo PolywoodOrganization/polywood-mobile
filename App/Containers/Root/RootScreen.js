@@ -18,7 +18,7 @@ class RootScreen extends React.Component {
   render() {
     return (
       <View style={Helpers.fill}>
-        <DropdownAlert ref={(ref) => DropDownHolder.setDropDown(ref)}/>
+        <DropdownAlert closeInterval={500} ref={(ref) => DropDownHolder.setDropDown(ref)}/>
         <AppNavigator
           // Initialize the NavigationService (see https://reactnavigation.org/docs/en/navigating-without-navigation-prop.html)
           ref={(navigatorRef) => {

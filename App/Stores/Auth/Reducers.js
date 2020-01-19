@@ -42,6 +42,24 @@ export const  signupSuccess = (state) => ({
   signupError: null
 })
 
+export const updateLoading = (state) => ({
+  ...state,
+  updateLoading: true,
+  updateError: null,
+})
+
+export const updateFailure = (state, { error }) => ({
+  ...state,
+  updateLoading: false,
+  updateError: error,
+})
+
+export const  updateSuccess = (state) => ({
+  ...state,
+  updateLoading: false,
+  updateError: null
+})
+
 export const logout = (state) => ({
   ...state,
   token: null,
@@ -56,5 +74,8 @@ export const reducer = createReducer(INITIAL_STATE, {
   [AuthTypes.SIGNUP_LOADING]: signupLoading,
   [AuthTypes.SIGNUP_SUCCESS]: signupSuccess,
   [AuthTypes.SIGNUP_FAILURE]: signupFailure,
+  [AuthTypes.UPDATE_LOADING]: updateLoading,
+  [AuthTypes.UPDATE_SUCCESS]: updateSuccess,
+  [AuthTypes.UPDATE_FAILURE]: updateFailure,
   [AuthTypes.LOGOUT]: logout,
 })

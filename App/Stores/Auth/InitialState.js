@@ -4,5 +4,7 @@ export const INITIAL_STATE = {
   loginError: null,
   signupLoading: false,
   signupError: null,
+  updateLoading: false,
+  updateError: null,
   currentUser: null,
 }
