@@ -11,4 +11,18 @@ export default StyleSheet.create({
     ...ApplicationStyles.title1,
     ...Helpers.textCenter,
   },
+  edit: {
+    width: 30,
+    height: 30,
+    resizeMode: 'cover',
+  },
+  titleContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    alignItems: 'center',
+  },
+  infos: {
+    ...Metrics.mediumVerticalMargin,
+    flex: 0.9,
+  }
 })

@@ -13,7 +13,7 @@ const ButtonComponent = (props) => (
       props.isLoading ?
         (<ActivityIndicator color={Colors.primary}/>)
         :
-        (<AppText style={styles.touchableText}>
+        (<AppText style={[styles.touchableText, props.textStyle]}>
           {props.title}
         </AppText>)
     }

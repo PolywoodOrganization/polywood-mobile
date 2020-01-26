@@ -29,6 +29,9 @@ class MovieScreen extends React.Component {
   componentDidUpdate(prevProps) {
     if (prevProps.movie !== this.props.movie) {
       this.props.getCasting(this.props.token, this.props.movie.movieid)
+      this.setState({
+        isFavorite: this.props.favorites.some(({ idmovie, iduser }) => idmovie === this.props.movie.movieid && iduser === this.props.me.iduser),
+      })
     }
   }
 

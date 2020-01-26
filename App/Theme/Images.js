@@ -15,5 +15,6 @@ export default {
   heart: require('App/Assets/Images/heart.png'),
   heartEmpty: require('App/Assets/Images/heart-empty.png'),
   edit: require('App/Assets/Images/edit.png'),
+  editPink: require('App/Assets/Images/edit-pink.png'),
   bin: require('App/Assets/Images/bin.png'),
 }
