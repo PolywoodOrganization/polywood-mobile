@@ -46,7 +46,7 @@ class SignupScreen extends React.Component {
         style={styles.container}
         behavior={Platform.OS === 'ios' ? 'padding' : null}
       >
-        <StatusBar backgroundColor={Colors.primary} barStyle="light-content"/>
+        <StatusBar backgroundColor={Colors.orange} barStyle="light-content"/>
         <View style={styles.logoContainer}>
           <Image style={Helpers.fullSize} source={Images.logo} resizeMode={'cover'}/>
         </View>

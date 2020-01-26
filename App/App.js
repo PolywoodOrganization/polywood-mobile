@@ -7,6 +7,8 @@ import SplashScreen from './Containers/SplashScreen/SplashScreen'
 
 const { store, persistor } = createStore()
 
+console.disableYellowBox = true
+
 export default class App extends Component {
   render() {
     return (
